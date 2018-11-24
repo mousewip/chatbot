@@ -1,0 +1,8 @@
+Flask
+Jinja2
+flask-migrate
+flask-script
+sqlalchemy
+flask-sqlalchemy
+pandas
+lxml
