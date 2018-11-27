@@ -40,21 +40,25 @@
 
 
 ## Danh sách công việc:
+### Giai đoạn 1:
 * Phân tích yêu cầu
 * Thiết kế hệ thống
 * Tìm hiểu, So sánh các loại chat bot
 * Lựa chọn nền tảng chat bot
 * Lựa chọn công cụ và môi trường phát triển sản phẩm
 
+### Giai đoạn 2:
 * Crawl dữ liệu
 * Tạo ChatBot mẫu
 * Tạo mẫu luồng xử lý
 * Tạo CSDL
 
+### Giai đoạn 3:
 * Train model NLP
 * Test model và parameter tuning.
 * Kết hợp vào chat bot
 
+### Giai đoạn 4:
 * Test
 * Triển khai lên server
 
