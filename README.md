@@ -28,3 +28,33 @@
 * Vi xử lý: Google VPS g1-small.
 * Ram: 1.75GB.
 * Đĩa cứng: 10GB.
+
+
+## Task
+* Nghiệp vụ (BA)
+* Thách thức, tính năng
+* Task
+* PM (agile)
+* Task ưu tiên
+* Công cụ (git)
+
+
+## Danh sách công việc:
+* Phân tích yêu cầu
+* Thiết kế hệ thống
+* Tìm hiểu, So sánh các loại chat bot
+* Lựa chọn nền tảng chat bot
+* Lựa chọn công cụ và môi trường phát triển sản phẩm
+
+* Crawl dữ liệu
+* Tạo ChatBot mẫu
+* Tạo mẫu luồng xử lý
+* Tạo CSDL
+
+* Train model NLP
+* Test model và parameter tuning.
+* Kết hợp vào chat bot
+
+* Test
+* Triển khai lên server
+
