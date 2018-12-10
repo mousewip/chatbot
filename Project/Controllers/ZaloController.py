@@ -18,6 +18,7 @@ def zalo_verify():
     data = request.args
     mess = data.get('message')
 
+    print('Zalo req mess: ' + mess)
     rs = Predict(mess)
     userID = data.get('fromuid')
     returnMessage = rs

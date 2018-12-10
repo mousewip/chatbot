@@ -63,6 +63,8 @@ def fb_webhook():
                     # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
+                    print('FB req mess: ' + message_text)
+
                     rs = Predict(message_text)
 
                     send_message(sender_id, rs)

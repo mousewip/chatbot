@@ -3,8 +3,6 @@ __version__ = '1.0'
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
-from sklearn.externals import joblib
-import pandas as pd
 from src.text_classification_predict import TextClassificationPredict
 
 app = Flask('Project', template_folder='Views')

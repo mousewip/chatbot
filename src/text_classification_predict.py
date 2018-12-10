@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from src.model.naive_bayes_model import NaiveBayesModel
-from src.model.svm_model import SVMModel
 from sklearn.externals import joblib
 import os
 from sklearn import metrics
@@ -12,6 +11,7 @@ class TextClassificationPredict(object):
     def __init__(self):
         self.test = None
         self.model = joblib.load(APP_ROOT + '/model.sav')
+        print('Load model success')
 
     def get_model(self):
         return self.model
