@@ -17,8 +17,10 @@ zalo_oa_client = ZaloOaClient(zalo_info)
 def zalo_verify():
     data = request.args
     mess = data.get('message')
+
+    rs = Predict(mess)
     userID = data.get('fromuid')
-    returnMessage = "Bạn vừa nói: " + mess
+    returnMessage = rs
     data = {
         'uid': userID,
         'message': returnMessage

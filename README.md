@@ -62,3 +62,12 @@
 * Test
 * Triển khai lên server
 
+
+
+** gợi ý:
+- theo hướng classify
+- tập trung phân loại
+- chatbot nhận đầu vào là mô tả bệnh, dự đoán ra loại bệnh
+- nên xem xét là NLP hay classify
+- nên bám theo 1 bài báo khoa học
+
