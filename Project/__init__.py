@@ -35,9 +35,11 @@ def Predict(pred_src):
     pred_text = pred_src.replace('\n', ' ').strip().lower()
     rs, accu = tcp.predict_conv(pred_text)
 
-    if rs == "mo_ta_trieu_chung":
+    if rs == "mo_ta_trieu_chung" and accu >= 0.5:
         rs = tcp.predict(pred_text)
         return rs
+    elif rs == "mo_ta_trieu_chung" and accu < 0.5:
+        rs = "Xin lỗi, bạn vui lòng hỏi câu khác nhé!"
     else:
         # chao_hoi, tro_giup, ket_thuc
         if rs == "chao_hoi":
