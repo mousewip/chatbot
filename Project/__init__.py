@@ -32,7 +32,10 @@ model = tcp.get_model()
 
 def Predict(pred_src):
     global tcp
-    rs = tcp.predict(pred_src)
+    rs, accu = tcp.predict_conv(pred_src)
+
+    if rs == "tro_giup" and accu <= 0.5:
+        rs = tcp.predict(pred_src)
     print(rs)
     return rs
 
