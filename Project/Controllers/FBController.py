@@ -60,6 +60,9 @@ def fb_webhook():
 
                     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]
+
+                    print("Sender ID : " + str(sender_id))
+                    print("Receipt ID : " + str(recipient_id))
                     # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
@@ -78,13 +81,13 @@ def fb_webhook():
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
                     pass
 
-                if messaging_event.get("read"):  # user clicked/tapped "postback" button in earlier message
-                    sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
-                    recipient_id = messaging_event["recipient"]["id"]
-                    # the recipient's ID, which should be your page's facebook ID
-                    #message_text = messaging_event["message"]["text"]  # the message's text
-
-                    # send_message(sender_id, "Read không rep chú m!")
-                    pass
+                # if messaging_event.get("read"):  # user clicked/tapped "postback" button in earlier message
+                #     sender_id = messaging_event["sender"]["id"]  # the facebook ID of the person sending you the message
+                #     recipient_id = messaging_event["recipient"]["id"]
+                #     # the recipient's ID, which should be your page's facebook ID
+                #     message_text = messaging_event["message"]["text"]  # the message's text
+                #
+                #     send_message(sender_id, "Read không rep chú m!")
+                #     pass
 
     return "ok", 200

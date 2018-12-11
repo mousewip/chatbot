@@ -20,7 +20,11 @@ def zalo_verify():
 
     print('Zalo req mess: ' + mess)
     rs = Predict(mess)
+    print(rs)
+
     userID = data.get('fromuid')
+    print(userID)
+
     returnMessage = rs
     data = {
         'uid': userID,
