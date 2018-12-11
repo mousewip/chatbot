@@ -32,17 +32,18 @@ model = tcp.get_model()
 
 def Predict(pred_src):
     global tcp
-    rs, accu = tcp.predict_conv(pred_src)
+    pred_text = pred_src.replace('\n', ' ').strip().lower()
+    rs, accu = tcp.predict_conv(pred_text)
 
     if rs == "mo_ta_trieu_chung":
-        rs = tcp.predict(pred_src)
+        rs = tcp.predict(pred_text)
         return rs
     else:
         # chao_hoi, tro_giup, ket_thuc
         if rs == "chao_hoi":
             lst_rs = []
-            lst_rs.append("Xin chào bạn, bạn cần trợ giúp gì?")
-            lst_rs.append("Xin chào bạn, bạn cần hỗ trợ gì?")
+            lst_rs.append("Xin chào, bạn cần trợ giúp gì?")
+            lst_rs.append("Xin chào, bạn cần hỗ trợ gì?")
             lst_rs.append("Bot có thể giúp gì cho bạn?")
             lst_rs.append("Supper Bot Y tế có mặt. Bạn cần gì nè?")
             rs = random.choice(lst_rs)
