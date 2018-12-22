@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import json
-import requests
+import requests, datetime
 from flask import request
 
 from Project import *
+from Project.Models import *
 
 
 from zalo.sdk.oa import ZaloOaInfo, ZaloOaClient
@@ -19,8 +20,9 @@ def zalo_verify():
     mess = data.get('message')
 
     print('Zalo req mess: ' + mess)
-    rs = Predict(mess)
+    rs = Predict(mess, 'Zalo')
     print(rs)
+
 
     userID = data.get('fromuid')
     print(userID)

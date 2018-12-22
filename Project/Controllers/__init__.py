@@ -1,1 +1,1 @@
-from . import HomeController, FBController, ZaloController
+from . import HomeController, FBController, ZaloController, AdminController

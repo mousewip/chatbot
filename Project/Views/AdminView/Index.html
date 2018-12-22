@@ -1,0 +1,280 @@
+{% extends 'Shared/_Layout.html' %}
+
+{% block content %}
+    <!--Grid row-->
+    <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <canvas id="countReqChart"></canvas>
+
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+            <!--Card-->
+            <div class="card">
+
+                <!--Card content-->
+                <div class="card-body">
+
+                    <canvas id="countReqChartTotal"></canvas>
+
+                </div>
+
+            </div>
+            <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+
+    </div>
+    <!--Grid row-->
+
+    <div class="row wow fadeIn">
+        <!--Grid column-->
+        <div class="col-md-5 mb-4">
+
+            <!--Card-->
+            <div class="card mb-4">
+                <!-- Card header -->
+                <div class="card-header text-center">
+                    Tổng thị phần
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-7 mb-4">
+
+            <!--Card-->
+            <div class="card mb-4">
+                <!-- Card header -->
+                <div class="card-header text-center">
+                    Số truy vấn trong tuần
+                </div>
+                <!--Card content-->
+                <div class="card-body">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+            <!--/.Card-->
+        </div>
+        <!--Grid column-->
+    </div>
+
+
+
+{% endblock %}
+
+{% block js_footer %}
+    <!-- Charts -->
+    <script>
+        // Line
+        let ctx = document.getElementById("countReqChart").getContext('2d');
+        let dataChart = {{ dataChart | safe }};
+        let myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Web", "Zalo", "Facebook"],
+                datasets: [{
+                    label: 'Số truy vấn trong hôm nay',
+                    data: dataChart,
+                    backgroundColor: [
+                        'rgba(255, 107, 104, 0.3)',
+                        'rgba(70, 191, 189, 0.3)',
+                        'rgba(77, 83, 96, 0.3)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 107, 104, 1)',
+                        'rgba(70, 191, 189, 1)',
+                        'rgba(77, 83, 96, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+        // Line
+        let ctxTotal = document.getElementById("countReqChartTotal").getContext('2d');
+        let dataChartTotal = {{ dataChart | safe }};
+        let myChartTotal = new Chart(ctxTotal, {
+            type: 'bar',
+            data: {
+                labels: ["Web", "Zalo", "Facebook"],
+                datasets: [{
+                    label: 'Tổng số truy vấn',
+                    data: dataChartTotal,
+                    backgroundColor: [
+                        'rgba(255, 107, 104, 1)',
+                        'rgba(70, 191, 189, 1)',
+                        'rgba(77, 83, 96, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 107, 104, 1)',
+                        'rgba(70, 191, 189, 1)',
+                        'rgba(77, 83, 96, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        //pie
+        let ctxP = document.getElementById("pieChart").getContext('2d');
+        let myPieChart = new Chart(ctxP, {
+            type: 'pie',
+            data: {
+                labels: ["Web", "Zalo", "Facebook"],
+                datasets: [{
+                    data: dataChart,
+                    backgroundColor: ["#F7464A", "#46BFBD", "#4D5360"],
+                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#616774"]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+
+        //line
+        let ctxL = document.getElementById("lineChart").getContext('2d');
+        let rp_web = {{ rp_web | safe }};
+        let rp_zalo = {{ rp_zalo | safe }};
+        let rp_fb = {{ rp_fb | safe }};
+        let myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: ["Mo", "Tu", "We", "Th", "Fr", "St", "Su"],
+                datasets: [{
+                        label: "Web",
+                        backgroundColor: [
+                            'rgba(255, 107, 104, 0.1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 107, 104, 1)'
+                        ],
+                        borderWidth: 2,
+                        data: rp_web
+                    },
+                    {
+                        label: "Zalo",
+                        backgroundColor: [
+                            'rgba(70, 191, 189, 0.1)'
+                        ],
+                        borderColor: [
+                            'rgba(70, 191, 189, 1)'
+                        ],
+                        data: rp_zalo
+                    },
+                    {
+                        label: "FB",
+                        backgroundColor: [
+                            'rgba(77, 83, 96, 0.1)'
+                        ],
+                        borderColor: [
+                            'rgba(77, 83, 96, 1)'
+                        ],
+                        data: rp_fb
+                    }
+                ]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        /*
+        //radar
+        var ctxR = document.getElementById("radarChart").getContext('2d');
+        var myRadarChart = new Chart(ctxR, {
+            type: 'radar',
+            data: {
+                labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+                datasets: [{
+                    label: "My First dataset",
+                    data: [65, 59, 90, 81, 56, 55, 40],
+                    backgroundColor: [
+                        'rgba(105, 0, 132, .2)',
+                    ],
+                    borderColor: [
+                        'rgba(200, 99, 132, .7)',
+                    ],
+                    borderWidth: 2
+                }, {
+                    label: "My Second dataset",
+                    data: [28, 48, 40, 19, 96, 27, 100],
+                    backgroundColor: [
+                        'rgba(0, 250, 220, .2)',
+                    ],
+                    borderColor: [
+                        'rgba(0, 213, 132, .7)',
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        //doughnut
+        var ctxD = document.getElementById("doughnutChart").getContext('2d');
+        var myLineChart = new Chart(ctxD, {
+            type: 'doughnut',
+            data: {
+                labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
+                datasets: [{
+                    data: [300, 50, 100, 40, 120],
+                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
+                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+        */
+    </script>
+{% endblock %}

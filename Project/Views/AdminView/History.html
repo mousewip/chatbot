@@ -1,0 +1,68 @@
+{% extends 'Shared/_Layout.html' %}
+
+{% block content %}
+    <div class="row wow fadeIn">
+        <div class="col-md-12 col-mb-4">
+            <div class="card pt-2 pb-2 pl-4 pr-4">
+                <table id="tbl_history" class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="th-sm">Time</th>
+                        <th class="th-sm">Request</th>
+                        <th class="th-sm">Bot predict</th>
+                        <th class="th-sm">Accuracy</th>
+                        <th class="th-sm">Chanel</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for h in history %}
+                        <tr>
+                            <td>{{ h.q_time.strftime('%d-%m-%Y, %H:%M:%S') }}</td>
+                            <td>{{ h.request }}</td>
+                            <td>{{ h.predicted }}</td>
+                            <td>{{ "%.2f" | format(h.accuracy) }}%</td>
+                            <td>{{ h.chanel }}</td>
+                            <td class="text-center">
+                                <a class="dt-edit" data-id="{{ h.id }}">
+                                    <span class="fa fa-edit"
+                                          style="font-size: 15px;color: #337AB7; "></span>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="dt-delete" data-id="{{ h.id }}">
+                                    <span class="fa fa-remove"
+                                          style="font-size: 15px;color: #c8180b; "></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Time</th>
+                        <th>Request</th>
+                        <th>Bot predict</th>
+                        <th>Accuracy</th>
+                        <th>Chanel</th>
+                        <th class="text-center">Edit</th>
+                        <th class="text-center">Delete</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block js_footer %}
+    <script>
+        var tb_fruits = $("#tbl_history").DataTable({
+            pageLength: 10
+        });
+    </script>
+{% endblock %}

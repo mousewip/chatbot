@@ -1,0 +1,64 @@
+{% extends 'Shared/_Layout.html' %}
+
+{% block content %}
+    <div class="row wow fadein">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <form class="text-center border border-light p-5" method="post">
+                        <p class="h4 mb-4">Config</p>
+                        <input type="text" id="fb-vt" name="fb-vt" class="form-control mb-4"
+                               placeholder="FB Verify Token">
+
+                        <input type="text" id="fb-pat" name="fb-pat" class="form-control mb-4"
+                               placeholder="FB Page Access Token">
+
+                        <input type="text" id="zoi" name="zoi" class="form-control mb-4"
+                               placeholder="Zalo OA ID">
+
+                        <input type="text" id="z-pat" name="z-pat" class="form-control mb-4"
+                               placeholder="Zalo Page Access Token">
+
+
+                        <div class="d-flex justify-content-around">
+                            <div>
+                                <a class="btn btn-danger btn-block my-4">Cancel</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-info btn-block my-4" id="btnSave">Save</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_footer %}
+    <script>
+        let fb_vt = $('#fb-vt').val();
+        let fb_patt = $('#fb-pat').val();
+        let zoi = $('#zoi').val();
+        let z_pat = $('#z-pat').val();
+
+        $.ajax({
+            url: '/admin/setting',
+            method: 'POST',
+            data: {
+                'fb_vt': fb_vt,
+                'fb_pat': fb_patt,
+                'zoi': zoi,
+                'z_pat': z_pat
+            },
+            success: function (result) {
+                if(result.code === 200){
+                    alert('Lưu thành công.');
+                }
+                else {
+                    alert('Lưu thất bại, thử lại');
+                }
+            }
+        })
+    </script>
+{% endblock %}

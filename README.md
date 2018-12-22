@@ -71,3 +71,10 @@
 - nên xem xét là NLP hay classify
 - nên bám theo 1 bài báo khoa học
 
+
+* Tiêu chí đánh giá:
+- agile
+- công cụ
+- khó khăn, cách giải quyết
+
+

@@ -68,7 +68,7 @@ def fb_webhook():
 
                     print('FB req mess: ' + message_text)
 
-                    rs = Predict(message_text)
+                    rs = Predict(message_text, 'FB')
 
                     send_message(sender_id, rs)
 
