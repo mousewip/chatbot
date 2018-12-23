@@ -5,7 +5,6 @@ import requests, datetime
 from flask import request
 
 from Project import *
-from Project.Models import *
 
 
 from zalo.sdk.oa import ZaloOaInfo, ZaloOaClient

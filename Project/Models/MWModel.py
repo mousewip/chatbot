@@ -110,12 +110,20 @@ def update(cq):
         return None
 
 
+def countByChanelInDay(chanel, day):
+    rs = ClientQuery.query.filter_by(chanel=chanel)\
+        .filter(ClientQuery.q_date == day).count()
+    return rs
+
+
 def countByChanelFromDayToDay(chanel, fr_day, to_day):
-    print(fr_day)
-    print(to_day)
     rs = ClientQuery.query.filter_by(chanel=chanel)\
         .filter(ClientQuery.q_date == fr_day).count()
-    print(rs)
+    return rs
+
+
+def countTotalByChanel(chanel):
+    rs = ClientQuery.query.filter_by(chanel=chanel).count()
     return rs
 
 

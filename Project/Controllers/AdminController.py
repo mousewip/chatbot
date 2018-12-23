@@ -11,10 +11,15 @@ import datetime, json
 def Admin():
     d = datetime.datetime.today().date()
 
-    c_web = MWModel.countByChanelFromDayToDay('Web', d, d)
-    c_zalo = MWModel.countByChanelFromDayToDay('Zalo', d, d)
-    c_fb = MWModel.countByChanelFromDayToDay('FB', d, d)
+    c_web = MWModel.countByChanelInDay('Web', d)
+    c_zalo = MWModel.countByChanelInDay('Zalo', d)
+    c_fb = MWModel.countByChanelInDay('FB', d)
     data = [c_web, c_zalo, c_fb]
+
+    c_web_total = MWModel.countTotalByChanel('Web')
+    c_zalo_total = MWModel.countTotalByChanel('Zalo')
+    c_fb_total = MWModel.countTotalByChanel('FB')
+    data_total = [c_web_total, c_zalo_total, c_fb_total]
 
     rp_week_web = [0, 0, 0, 0, 0, 0, 0]
     rp_week_zalo = [0, 0, 0, 0, 0, 0, 0]
@@ -26,7 +31,15 @@ def Admin():
         rp_week_zalo[i] = MWModel.countByChanelFromDayToDay('Zalo', d_w, d_w)
         rp_week_fb[i] = MWModel.countByChanelFromDayToDay('FB', d_w, d_w)
 
-    return render_template('AdminView/Index.html', page='Dashboard', dataChart=json.dumps(data), rp_web = json.dumps(rp_week_web), rp_zalo = json.dumps(rp_week_zalo), rp_fb = json.dumps(rp_week_fb))
+    bag = {
+        'd_chart': json.dumps(data),
+        'd_total_chart': json.dumps(data_total),
+        'rp_web': json.dumps(rp_week_web),
+        'rp_zalo': json.dumps(rp_week_zalo),
+        'rp_fb': json.dumps(rp_week_fb)
+    }
+
+    return render_template('AdminView/Index.html', page='Dashboard', bag=bag)
 
 
 @app.route('/admin/history', methods=['POST', 'GET'])

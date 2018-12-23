@@ -93,7 +93,7 @@
     <script>
         // Line
         let ctx = document.getElementById("countReqChart").getContext('2d');
-        let dataChart = {{ dataChart | safe }};
+        let dataChart = {{ bag['d_chart'] | safe }};
         let myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -128,7 +128,7 @@
 
         // Line
         let ctxTotal = document.getElementById("countReqChartTotal").getContext('2d');
-        let dataChartTotal = {{ dataChart | safe }};
+        let dataChartTotal = {{ bag['d_total_chart'] | safe }};
         let myChartTotal = new Chart(ctxTotal, {
             type: 'bar',
             data: {
@@ -167,7 +167,7 @@
             data: {
                 labels: ["Web", "Zalo", "Facebook"],
                 datasets: [{
-                    data: dataChart,
+                    data: dataChartTotal,
                     backgroundColor: ["#F7464A", "#46BFBD", "#4D5360"],
                     hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#616774"]
                 }]
@@ -180,9 +180,9 @@
 
         //line
         let ctxL = document.getElementById("lineChart").getContext('2d');
-        let rp_web = {{ rp_web | safe }};
-        let rp_zalo = {{ rp_zalo | safe }};
-        let rp_fb = {{ rp_fb | safe }};
+        let rp_web = {{ bag['rp_web'] | safe }};
+        let rp_zalo = {{ bag['rp_zalo'] | safe }};
+        let rp_fb = {{ bag['rp_fb'] | safe }};
         let myLineChart = new Chart(ctxL, {
             type: 'line',
             data: {
@@ -224,57 +224,5 @@
                 responsive: true
             }
         });
-
-        /*
-        //radar
-        var ctxR = document.getElementById("radarChart").getContext('2d');
-        var myRadarChart = new Chart(ctxR, {
-            type: 'radar',
-            data: {
-                labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
-                datasets: [{
-                    label: "My First dataset",
-                    data: [65, 59, 90, 81, 56, 55, 40],
-                    backgroundColor: [
-                        'rgba(105, 0, 132, .2)',
-                    ],
-                    borderColor: [
-                        'rgba(200, 99, 132, .7)',
-                    ],
-                    borderWidth: 2
-                }, {
-                    label: "My Second dataset",
-                    data: [28, 48, 40, 19, 96, 27, 100],
-                    backgroundColor: [
-                        'rgba(0, 250, 220, .2)',
-                    ],
-                    borderColor: [
-                        'rgba(0, 213, 132, .7)',
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-
-        //doughnut
-        var ctxD = document.getElementById("doughnutChart").getContext('2d');
-        var myLineChart = new Chart(ctxD, {
-            type: 'doughnut',
-            data: {
-                labels: ["Red", "Green", "Yellow", "Grey", "Dark Grey"],
-                datasets: [{
-                    data: [300, 50, 100, 40, 120],
-                    backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-                    hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-        */
     </script>
 {% endblock %}
