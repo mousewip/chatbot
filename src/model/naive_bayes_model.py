@@ -18,7 +18,7 @@ class NaiveBayesModel(object):
             ("transformer", FeatureTransformer()),#sử dụng pyvi tiến hành word segmentation
             ("vect", CountVectorizer()),#bag-of-words
             ("tfidf", TfidfTransformer()),#tf-idf
-            ("clf", MultinomialNB(alpha=0))#model naive bayes
+            ("clf", MultinomialNB(alpha=0.01))#model naive bayes
         ])
 
         return pipe_line

@@ -13,8 +13,9 @@ APP_ROOT = os.path.dirname(__file__)
 class TextClassificationPredict(object):
     def __init__(self):
         self.test = None
-        self.model = joblib.load(APP_ROOT + '/model.sav')
-        self.model_conv = joblib.load((APP_ROOT + '/model_conv.sav'))
+        if os.path.isfile(APP_ROOT + '/model.sav'):
+            self.model = joblib.load(APP_ROOT + '/model.sav')
+            self.model_conv = joblib.load((APP_ROOT + '/model_conv.sav'))
         print('Load all model success')
 
     def get_model(self):
@@ -134,7 +135,7 @@ class TextClassificationPredict(object):
 
     def train_model(self):
         #  train data
-        df_train = pd.read_json('sk.json')
+        df_train = pd.read_json('sk.json', encoding='utf8')
 
         test_data = []
         test_data.append({"feature": "tôi bị đau bụng", "target": "đau ruột thừa"})
@@ -142,7 +143,7 @@ class TextClassificationPredict(object):
 
         # init model naive bayes
         model = NaiveBayesModel()
-
+        print('begin train model')
         clf = model.clf.fit(df_train["feature"], df_train.target)
 
         joblib.dump(clf, 'model.sav')
@@ -158,11 +159,11 @@ class TextClassificationPredict(object):
 if __name__ == '__main__':
     tcp = TextClassificationPredict()
 
-    if not os.path.isfile("model.sav"):
+    if not os.path.isfile("model_chuan.sav"):
         tcp.train_model()
         print("Train model success")
     else:
-        model = joblib.load('model.sav')
+        model = joblib.load('model_chuan.sav')
         #  test data
         test_data = []
         test_data.append({"feature": "hoa mắt", "target": "cận thị"})
@@ -178,3 +179,13 @@ if __name__ == '__main__':
 
         score = metrics.accuracy_score(df_test.target, predicted)
         print("accuracy:   %0.3f" % score)
+        while True:
+            inp = input("> ")
+            test_data = []
+            test_data.append(
+                {"feature": inp, "target": ""})
+            df_test = pd.DataFrame(test_data)
+            predicted = model.predict(df_test["feature"])
+            ls = model.predict_proba(df_test["feature"])
+            print(predicted[0])
+            print("accuracy: %.2f" % (max(ls[0] * 100)))
