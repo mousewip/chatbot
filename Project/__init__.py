@@ -53,7 +53,7 @@ def Predict(pred_src, chanel):
             from_u=''
         )
         cq = MWModel.add(cq)
-        return "Có thể bạn bị {rs}, độ tin cậy {acc:.2f}%".format(rs=rs, acc=accu)
+        return "Có thể bạn đang bị {rs}".format(rs=rs)
     elif rs == "mo_ta_trieu_chung" and accu < 0.5:
         rs = "Xin lỗi, bạn vui lòng hỏi câu khác nhé!"
         pre = 'unknown'
