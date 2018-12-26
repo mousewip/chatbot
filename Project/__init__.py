@@ -35,8 +35,9 @@ def Predict(pred_src, chanel):
     pred_text = pred_src.replace('\n', ' ').strip().lower()
     rs, accu = tcp.predict_conv(pred_text)
     pre = rs
+    print('accu {accu}'.format(accu=accu))
 
-    if rs == "mo_ta_trieu_chung" and accu >= 0.5:
+    if rs == "mo_ta_trieu_chung" and accu >= 50:
         rs, accu = tcp.predict(pred_text)
         pre = no_accent_vietnamese_unicode(rs).replace(' ', '_')
         cq = MWModel.ClientQuery(
@@ -54,22 +55,17 @@ def Predict(pred_src, chanel):
         )
         cq = MWModel.add(cq)
         return "Có thể bạn đang bị {rs}".format(rs=rs)
-    elif rs == "mo_ta_trieu_chung" and accu < 0.5:
+    elif rs == "mo_ta_trieu_chung" and accu < 50:
         rs = "Xin lỗi, bạn vui lòng hỏi câu khác nhé!"
         pre = 'unknown'
     else:
         # chao_hoi, tro_giup, ket_thuc
         if rs == "chao_hoi":
-            lst_rs = []
-            lst_rs.append("Xin chào, bạn cần trợ giúp gì?")
-            lst_rs.append("Xin chào, bạn cần hỗ trợ gì?")
-            lst_rs.append("Bot có thể giúp gì cho bạn?")
-            lst_rs.append("Supper Bot Y tế có mặt. Bạn cần gì nè?")
-            rs = random.choice(lst_rs)
+            rs = "Chào mừng bạn đến với chúng tôi!\nTôi là Chatbot hỗ trợ chuẩn đoán các bệnh thường gặp ở người.\nVui lòng mô tả triệu chứng bệnh của bạn ở ô chat."
 
         elif rs == "ket_thuc":
             rs = "Cám ơn bạn đã sử dụng dịch vụ."
-        elif rs == "tro_giup" and accu >= 0.5:
+        elif rs == "tro_giup" and accu >= 50:
             rs = "Bạn cần hỗ trợ gì?"
         else:
             pre = 'unknown'
